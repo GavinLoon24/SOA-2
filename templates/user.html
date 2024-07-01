@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>User Page</title>
+    <style>
+        /* Hide the add comment form by default */
+        .add-comment-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">User Page</h1>
+        
+        <form id="commentForm" action="/predict" method="POST">
+            <div class="form-group">
+                <label for="comment">Enter your comment:</label>
+                <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Enter your comment here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Check</button>
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-info mt-4">
+            <h4>Result:</h4>
+            <p>The comment is classified as: <strong>{{ prediction }}</strong></p>
+            <p>Comment: {{ comment }}</p>
+        </div>
+        {% endif %}
+
+ 
+        
+        <!-- Link to view all comments -->
+        <a href="/comments" class="btn btn-info mt-3">View All Comments</a>
+        
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Ensure the add comment form remains hidden after check button is clicked
+        document.getElementById('commentForm').addEventListener('submit', function() {
+            document.querySelector('.add-comment-form').classList.add('d-none');
+        });
+    </script>
+</body>
+</html>
